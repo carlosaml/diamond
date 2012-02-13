@@ -26,6 +26,7 @@ do
 
 
   j=$(($number-$i))
+  left=j
   while [ $j -gt 0 ]
   do
     printf '.'
@@ -36,14 +37,21 @@ do
   chr $i
 
   diff_to_a=$(( $i - $ord_a)) 
- 
-  spaces_at_right=$(($diff_to_a * 2 - $default_diff))
+
+  spaces_at_right=0
+  if [ $diff_to_a -ne "0" ]; then
   
-  while [ $spaces_at_right -gt 0 ]
-  do
-    #printf '.'
-    spaces_at_right=$(($spaces_at_right-1))
-  done 
+   spaces_at_right=$(($diff_to_a * 2 + $left - 1));
+
+    while [ $spaces_at_right -gt 0 ]
+    do
+      printf '.'
+      spaces_at_right=$(($spaces_at_right-1))
+    done
+
+    chr $i    
+  fi
+
 
   i=$(( $i + 1 ))
 
